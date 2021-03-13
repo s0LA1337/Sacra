@@ -1,6 +1,6 @@
 
-#ifndef SACRA_3D_STATE
-#define SACRA_3D_STATE
+#ifndef SACRA_3D_GLES3_DRAWABLE
+#define SACRA_3D_GLES3_DRAWABLE
 
 
 #include <stdbool.h>
