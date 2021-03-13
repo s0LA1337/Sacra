@@ -11,7 +11,7 @@
 
 typedef struct {
     
-    size_t length;   // How many bytes are used
+    size_t length;
     size_t capacity; // How many bytes are allocated
     
     char* data;
@@ -37,12 +37,14 @@ void          sacra_string_from_chars_null (sacra_string *string, char *data);
 char*         sacra_string_to_chars        (sacra_string *string);
 
 void          sacra_string_prefix          (sacra_string *string, sacra_string *prefix);
-void          sacra_string_infix           (sacra_string *string, sacra_string *infix, size_t index);
+// void          sacra_string_infix           (sacra_string *string, sacra_string *infix, size_t index);
 void          sacra_string_suffix          (sacra_string *string, sacra_string *suffix);
-
+/*
 void          sacra_string_prefix_single   (sacra_string *string, char prefix);
 void          sacra_string_infix_single    (sacra_string *string, char infix,  size_t index);
 void          sacra_string_suffix_single   (sacra_string *string, char suffix);
+*/
+void          sacra_string_print           (sacra_string *string);
 
 
 #endif

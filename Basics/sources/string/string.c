@@ -151,14 +151,15 @@ void sacra_string_resize_to(sacra_string *string, size_t new_size) {
         }
         
         free(old_data);
-        string->data = new_data;
+        string->data   = new_data;
+        string->length = new_size;
     }
     
 }
 
 void sacra_string_resize_by(sacra_string *string, size_t difference) {
     
-    ssize_t new_size = string->length - difference;
+    ssize_t new_size = string->length + difference;
     
     if(new_size < 1) {
         
@@ -232,7 +233,38 @@ char* sacra_string_to_chars(sacra_string *string) {
 }
 
 
-void          sacra_string_prefix          (sacra_string* string, sacra_string* prefix) {
+void sacra_string_prefix(sacra_string *string, sacra_string *prefix) {
+    
+    ssize_t  index          = string->length;
+    size_t   prefix_length  = prefix->length;
+    
+    sacra_string_resize_by(string, prefix_length);
+    
+    
+    // Move the characters of 'string' 'prefix->length' bytes to the end
+    
+    index                  += prefix_length;
+    char    *string_data    = string->data;
+    while(index >= prefix_length) {
+        
+        string_data[index] = string_data[index-prefix_length];
+        --index;
+    }
+    
+    
+    // Copy the prefix in front of the string
+    
+    char    *prefix_data = prefix->data;
+    index                = 0;
+    while(index < prefix_length) {
+        
+        string_data[index] = prefix_data[index];
+        ++index;
+    }
+    
+}
+
+void sacra_string_infix(sacra_string *string, sacra_string *infix, size_t index) {
     
     
     
@@ -240,17 +272,48 @@ void          sacra_string_prefix          (sacra_string* string, sacra_string* 
     
 }
 
-void          sacra_string_infix           (sacra_string* string, sacra_string* infix, size_t index) {
+void sacra_string_suffix(sacra_string *string, sacra_string *suffix) {
+    
+    size_t  string_length = string->length;
+    size_t  suffix_length = suffix->length;
+    
+    sacra_string_resize_by(string, suffix->length);
     
     
+    // Copy the suffix after the string
+    
+    char   *string_data   = string->data;
+    char   *suffix_data   = suffix->data;
+    size_t  index         = 0;
+    while(index < suffix_length) {
+        
+        string_data[string_length+index] = suffix_data[index];
+        ++index;
+    }
+    
+}
+
+
+
+void sacra_string_prefix_single(sacra_string *string, char prefix) {
+    
+    // TODO
     
     
     
 }
 
-void          sacra_string_suffix          (sacra_string* string, sacra_string* suffix) {
+void sacra_string_infix_single(sacra_string *string, char infix,  size_t index) {
+    
+    // TODO
     
     
+    
+}
+
+void sacra_string_suffix_single(sacra_string *string, char suffix) {
+    
+    // TODO
     
     
     
@@ -258,27 +321,8 @@ void          sacra_string_suffix          (sacra_string* string, sacra_string* 
 
 
 
-void          sacra_string_prefix_single   (sacra_string* string, char* prefix) {
+void sacra_string_print(sacra_string *string) {
     
-    
-    
-    
-    
-}
-
-void          sacra_string_infix_single    (sacra_string* string, char* infix,  size_t index) {
-    
-    
-    
-    
-    
-}
-
-void          sacra_string_suffix_single   (sacra_string* string, char* suffix) {
-    
-    
-    
-    
-    
+    printf("%s", string->data);
 }
 
