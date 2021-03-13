@@ -158,7 +158,7 @@ void sacra_string_resize_to(sacra_string *string, size_t new_size) {
 
 void sacra_string_resize_by(sacra_string *string, size_t difference) {
     
-    ssize_t new_size = string->length - difference;
+    size_t new_size = string->length - difference;
     
     if(new_size < 1) {
         
