@@ -26,11 +26,31 @@ void delete_json_base(sacra_json_base *json_base)
 
 sacra_json_object *try_get_object(const sacra_json_base *json_base, const sacra_string *key)
 {
+  sacra_json_object *temp = NULL;
+  for(size_t i = 0u; i < json_base->child_count; ++i)
+  {
+    if(temp = (sacra_json_object*)json_base->children[i])
+    {
+      if(!strcmp(key->data, temp->key))
+        return temp;
+    }
+  }
+
   return NULL;
 }
 
 sacra_json_array *try_get_array(const sacra_json_base *json_base, const sacra_string *key)
 {
+  sacra_json_array *temp = NULL;
+  for(size_t i = 0u; i < json_base->child_count; ++i)
+  {
+    if(temp = (sacra_json_array*)json_base->children[i])
+    {
+      if(!strcmp(key->data, temp->key))
+        return temp;
+    }
+  }
+
   return NULL;
 }
 

@@ -17,6 +17,8 @@ typedef struct /* sacra_json_object */
 
 typedef struct /* sacra_json_array */
 {
+  sacra_string *key;
+
   sacra_json_object *json_objects[]; // we want to differentiate...
   size_t json_object_count; 
 
